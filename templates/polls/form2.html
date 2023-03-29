@@ -1,0 +1,377 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link type="text/css" href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <title>Form 2</title>
+</head>
+<style>
+    body {
+        margin-right: 5%;
+        margin-left: 5%;
+        
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+
+        background-color: #D3D3D3; /* Set background color to dark blue */
+		margin: 0; /* Remove default margin */
+    
+        
+    }
+
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+        color: #fff;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+    .logo img {
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+        transition: color 0.2s ease-in-out;
+    }
+    .nav a:hover {
+        color: #f0c818;
+    }
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .gd-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
+    .gd-logo img {
+        height: 50px;
+        margin-right: 10px;
+    }
+
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .right-label {
+        text-align: right;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    
+    input,
+    select {
+
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        font-size: 16px;
+      }
+
+
+    select {
+        
+        appearance: none;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-size: 20px;
+        background-position: right 10px center;
+        padding-right: 40px;
+      
+      }
+
+
+      .row {
+        margin-bottom: 20px;
+      }
+
+
+
+      .btn {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .btn:hover {
+        background-color: #444;
+      }
+
+
+      .col-label {
+        text-align: right;
+        font-weight: bold;
+      }
+
+    .col-md-6,
+    .col-md-4,
+    .col-md-2,
+    .col-md-10 {
+        border: solid 1px #000;
+    }
+
+    .npadding {
+        padding: 0 !important;
+    }
+    p
+    {
+        padding-top: calc(.375rem + 1px);
+        padding-bottom: calc(.375rem + 1px);
+        margin-bottom: 0;
+        line-height:1.5;
+    }
+</style>
+<body>
+    <div class="container-fluid mt-3">
+        <div class="row mb-3 mt-3">
+            <div class="col-md-12 npadding text-center">
+                <h1>Test Currency Procurement Form</h1>
+            </div>
+        </div>
+
+
+        <img src="{% static './g_d.png' %}" alt="" width="250" height="auto"
+        class="d-inline-block align-text-middle px-3">
+
+
+
+
+
+        <form name="mform" id="mform" method="POST" action="">
+            {% csrf_token %}
+            <div class="row mb-3 mt-3">
+                <label for="date" class="col-md-2 col-form-label">Date: </label>
+                <div class="col-md-4 npadding">
+                    <input required type="datetime-local" class="form-control" id="date" name="date">
+                </div>
+                <label for="contantNo" class="col-md-2 col-form-label right-label">Contact No. </label>
+                <div class="col-md-4 npadding">
+                    <input required type="text" class="form-control" id="contantNo" name="contantNo">
+                </div>
+            </div>
+            <div class="row mt-5 mb-5">
+
+            </div>
+            <div class="row mb-3 mt-3">
+                <label for="orderno" class="col-md-2 col-form-label">َQuotation/Sales Order No: </label>
+                <div class="col-md-10 npadding">
+                    <input required type="text" class="form-control" id="orderno" name="orderno">
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <label for="currency" class="col-md-2 col-form-label">Currency description: </label>
+                <div class="col-md-10 npadding">
+                    <select class="form-select" aria-label="Default select example" id="currency" name="currency">
+                        {% for x in currencies %}
+                            <option value="{{x.fullName}}">{{x.fullName}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <label for="purpose" class="col-md-2 col-form-label">Purpose of procurement: </label>
+                <div class="col-md-10 npadding">
+                    <input required type="text" class="form-control" id="purpose" name="purpose">
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <label for="source" class="col-md-2 col-form-label">Describe source: </label>
+                <div class="col-md-10 npadding">
+                    <input required type="text" class="form-control" id="source" name="source">
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <label for="share" class="col-md-2 col-form-label">Our share of estimated freight and handling cost: </label>
+                <div class="col-md-10 npadding">
+                    <input required type="text" class="form-control" id="share" name="share" style="height:100%">
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <label for="reqdate" class="col-md-2 col-form-label">Date of requirement: </label>
+                <div class="col-md-10 npadding">
+                    <input required type="date" class="form-control" id="reqdate" name="reqdate">
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <label for="period" class="col-md-2 col-form-label">Period of holding: </label>
+                <div class="col-md-10 npadding">
+                    <input required type="text" class="form-control" id="period" name="period">
+                </div>
+            </div>
+            <div class="row mt-5 mb-5">
+            
+
+            </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-md-2 text-center">
+                    <p>Currency</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <p>Denomination</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <p>No.of pcs</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <p>Remarks</p>
+                </div>
+                <div class="col-md-2 text-end">
+                    <p>Total value in local currency</p>
+                </div>
+            </div>
+            <div id="add1" class="row mb-3 mt-3">
+                <div class="col-md-2 text-center npadding">
+                    <select class="form-select" aria-label="Default select example" id="currencies0" name="currencies0">
+                        {% for x in currencies %}
+                            <option value="{{x.fullName}}">{{x.fullName}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-1 npadding boxthis">
+                    <input required type="text" class="form-control" id="denomination0" name="denomination0">
+                </div>
+                <div class="col-md-2 npadding">
+                    <div class="input-group">
+                        <input required type="text" class="form-control text-end" id="npieces0" name="npieces0">
+                        <div class="input-group-text">Pcs</div>
+                      </div>
+                </div>
+                <div class="col-md-2 npadding"><input required type="text" class="form-control" id="remarks0" name="remarks0"></div>
+                <div class="col-md-2 npadding text-end">
+                    <div class="input-group">
+                        <input required type="text" class="form-control text-end" id="tlprice0" name="tlprice0">
+                        <div class="input-group-text"></div>
+                      </div>
+                </div>
+                <div class="col-md-1" id = "addbtn">
+                    <button class="btn btn-success w-100" onclick="addRow()">Add</button>
+                </div>
+            </div>
+
+        </form>
+        <div class="row mb-3 mt-3">
+            <div class="col-md-4 text-end">
+                <p>Total pcs/Value: </p>
+            </div>
+            <div class="col-md-2 npadding">
+                <div class="input-group">
+                    <input required type="text" class="form-control text-end" value="0" id="tlval" name="tlval" disabled>
+                    <div class="input-group-text">Pcs</div>
+                </div>
+            </div>
+            <div class="col-md-2 npadding text-end">
+                <div class="input-group">
+                    <input required type="text" class="form-control text-end" value="0.00" id="tlpieces" name="tlpieces" disabled>
+                    <div class="input-group-text"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 mt-3">
+            <div class="col-md-1 npadding">
+                <button class="btn btn-primary" onclick="Submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script>
+        // get the current date and time
+        function dateNow(){
+            var now = new Date();
+
+            // format the date and time as a string that can be used to set the value of a datetime-local input field
+            var formattedDate = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+            var formattedTime = ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2);
+            var dateTimeString = formattedDate + 'T' + formattedTime;
+
+            // set the value of the datetime-local input field
+            var datetimeLocalInput = document.getElementById('datetime-local-input');
+            document.getElementById("date").value = dateTimeString;
+        }
+        dateNow();
+    </script>
+    <script>
+        
+
+        var i = 0;
+        function addRow()
+        {
+            i++;
+            document.getElementById("mform").innerHTML += '<div id="add' +i+ '"class="row mb-3 mt-3"><div class="col-md-2 text-center npadding"><select class="form-select" aria-label="Default select example" id="currencies'+i+'" name="currencies'+i+'">{% for x in currencies %}<option value="{{x.fullName}}">{{x.fullName}}</option>{% endfor %}</select></div><div class="col-md-1  boxthis npadding"><input required type="text" class="form-control" id="denomination'+i+'" name="denomination'+i+'"></div><div class="col-md-2 npadding"><div class="input-group"><input required type="text" class="form-control text-end" id="npieces'+i+'" name="npieces'+i+'"><div class="input-group-text">Pcs</div></div></div><div class="col-md-2 npadding"><input required type="text" class="form-control" id="remarks'+i+'" name="remarks'+i+'"></div><div class="col-md-2 npadding text-end"><div class="input-group"><input required type="text" class="form-control text-end" id="tlprice'+i+'" name="tlprice'+i+'"><div class="input-group-text">AED</div></div></div><div class="col-md-1"><button class="btn btn-danger w-100" onclick="rmRow('+i+')">Remove</button></div></div>';
+            dateNow();
+        }
+        function rmRow(x)
+        {
+            document.getElementById("add"+x).outerHTML = "";
+            dateNow();
+            i--;
+        }
+        function Submit()
+        {
+            document.getElementById("mform").submit();
+            dateNow();
+        }
+
+    </script>
+    
+</body>
+
+</html>
